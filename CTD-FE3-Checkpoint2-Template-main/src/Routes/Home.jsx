@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import Card from "../Components/Card";
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
       <h1>Home</h1>
       <div className="card-grid container">
         <Card />
+        <Outlet/>
       </div>
     </>
   );

@@ -2,6 +2,7 @@
 import { Outlet } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
+import AppRoutes from "./Routes";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <div className={`app light}`}>
         <Navbar />
         <main>
+          <AppRoutes />
           <Outlet />
         </main>
         <Footer />
