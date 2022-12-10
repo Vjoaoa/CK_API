@@ -1,9 +1,16 @@
-import styles from "./Navbar.module.css";
+import { useContext } from "react";
 
+import styles from "./Navbar.module.css";
+import "./ThemeCSS.css"
+
+import{ ThemeContext } from "./ThemeContext"
 const Navbar = () => {
+  
+  const {theme, handleTheme} = useContext(ThemeContext)
 
   return (
-    <header className="sticky-top">
+    <div className={theme === "ligth" ? "cardDark" : "cardLight"}>
+          <header className="sticky-top">
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar navbar-dark bg-dark ou navbar-light bg-light*/}
       <nav
@@ -55,17 +62,19 @@ const Navbar = () => {
                  Na linha seguinte deverá ser feito um teste se a aplicação
                  está em dark mode e deverá utilizar o icone ☀ ou 🌙 e btn-dark ou btn-light*/}
                 <button
-                  className={`btn btn-light${styles.btnStyle
-                    }`}
+                  className={`btn btn-light${styles.btnStyle}`} 
                 >
                   ☀ 🌙{" "}
                 </button>
+
+                <button onClick={handleTheme}></button>
               </li>
             </ul>
-          </div>
+          </div>  
         </div>
       </nav>
     </header>
+    </div>
   );
 };
 
