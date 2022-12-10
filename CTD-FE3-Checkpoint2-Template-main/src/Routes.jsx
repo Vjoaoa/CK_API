@@ -9,17 +9,15 @@ const AppRoutes = () => {
     return (
       
         <BrowserRouter>
-            
-        <Routes>
-            <Route path="" element={<Home />}>
-
-                <Route path="/detail" element={<Detail />} />
+            <Routes>
+                <Route path="" element={<Home />}>
+                    <Route path="/detail" element={<Detail />} />
+                </Route>
+                
                 <Route path="/login" element={<Login />} />
+            </Routes>
+        </BrowserRouter>
 
-            </Route>
-        </Routes>
-    
-    </BrowserRouter>
     )
 }
 
