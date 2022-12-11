@@ -1,37 +1,32 @@
+import { useContext } from "react";
 import styles from "./Card.module.css";
-import {useEffect, useState} from "react";
-import api from "../services/api";
 
-const Card = () => {
 
-  const [cardDentists, setcardDentists] = useState([]);
-  
-  useEffect(() => {
-    api.get("/dentista")
-    .then((response) => {setcardDentists(response.data);
-    console.log(response.data);
-    })
-  }, []);
-
+const Card = (props) => {
+  const { dentista } = props;
 
   return (
+
     <>
-      <div className={`card`}>
+
+      <div >
         <img
           className="card-img-top"
           src="/images/doctor.jpg"
           alt="doctor placeholder"
         />
         <div className={`card-body ${styles.CardBody}`}>
-
-        {cardDentists.map((dentist) =>
-          <a href={`/dentist/MatriculaDoDentista`}>
-            <h5 className="card-title" key="id">{dentist.nome}</h5>
-            <h5 className="card-title" key="id">{dentist.sobrenome}</h5>
+          <a href={`/dentist/${dentista.matricula}`}>
+            <h5 className={`card-title ${styles.title}`}>
+              {dentista.nome} {dentista.sobrenome}
+            </h5>
           </a>
-          )};
-        </div>  
+          <button style={{ fontSize: "12px" }} value={dentista.matricula}>
+            Adicionar aos favoritos
+          </button>
+        </div>
       </div>
+      
     </>
   );
 };

@@ -12,17 +12,16 @@ const Home = () => {
     .then((response) => {setDentists(response.data);
     console.log(response.data);
     })
-  }, []);
+  });
 ;
 
   return (
     <>
       <h1>Home</h1>
-      <div className="card-grid container">
-        {dentists.map((dentist) => (
-          <Card key={dentist.id} dentist={dentist} />
-        ))}
-        
+        <div className="card-grid container">
+        {dentists.map((dentist) => {
+          return <Card dentista={dentist} key={dentist.matricula}/>;
+        })}
       </div>
     </>
   );

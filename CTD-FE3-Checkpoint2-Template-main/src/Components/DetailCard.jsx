@@ -17,8 +17,7 @@ const DetailCard = () => {
 
   detalheDentista.map((dentist) => (
     <a href={`/dentist/${dentist.matricula}`}>
-      <h5 className="card-title" key="id">{dentist.nome}</h5>
-      <h5 className="card-title" key="id">{dentist.sobrenome}</h5>
+      <h5 className="card-title" key="id">{dentist.nome} {dentist.sobrenome}</h5>
     </a>
   ));
   return (
