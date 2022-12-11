@@ -2,7 +2,6 @@ import { useContext } from "react";
 
 import styles from "./Navbar.module.css";
 import "./ThemeCSS.css"
-import { useNavigate } from "react-router-dom";
 
 import{ ThemeContext } from "./ThemeContext"
 const Navbar = () => {
@@ -41,8 +40,8 @@ const Navbar = () => {
           >
             <ul className="navbar-nav mb-2 mb-sm-0">
               <li className={`nav-item ${styles.navBarLink}`}>
-                  
-                <a className="nav-link" href= {navigate("")}>
+                {/* Ao clicar, o usuário deve ser redirecionado a home, com react-router */}
+                <a className="nav-link" href="/home">
                   Home
                 </a>
               </li>
