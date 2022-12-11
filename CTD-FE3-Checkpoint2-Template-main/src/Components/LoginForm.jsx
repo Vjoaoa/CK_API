@@ -10,8 +10,8 @@ const Auth = () => {
 
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("dentistaAdmin");
+  const [password, setPassword] = useState("admin123");
 
   function submitForm(event){
     event.preventDefault();

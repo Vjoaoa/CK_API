@@ -1,9 +1,6 @@
-import{ createContext } from "react"
+import{ createContext, useState } from "react"
 
 export const ThemeContext = createContext({})
-
-
-
 
 
 const ThemaProvider =({children}) =>{

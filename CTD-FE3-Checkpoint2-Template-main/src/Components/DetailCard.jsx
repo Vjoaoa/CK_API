@@ -1,18 +1,22 @@
-import { useEffect } from "react";
+
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
+import { useContext } from "react";
+import { DetailContext } from "./contests/Detail";
 
 const DetailCard = () => {
 
-  useEffect(() => {
-    //Nesse useEffect, você vai fazer um fetch na api passando o 
-    //id do dentista que está vindo do react-router e carregar os dados em algum estado
-  }, []);
+  const { detail, error, loading } = useContext(DetailContext);
+
   return (
+
+    
     //As instruções que estão com {''} precisam ser 
     //substituídas com as informações que vem da api
     <>
-      <h1>Detail about Dentist {'Nome do Dentista'} </h1>
+      
+      {/* {detail.nome} */}
+      <h1>Detail about Dentist  </h1>
       <section className="card col-sm-12 col-lg-6 container">
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
@@ -28,12 +32,15 @@ const DetailCard = () => {
           </div>
           <div className="col-sm-12 col-lg-6">
             <ul className="list-group">
-              <li className="list-group-item">Nome: {'Nome do Dentista'}</li>
+            {/* {detail.nome} */}
+              <li className="list-group-item">Nome: </li>
+              {/* {detail.sobrenome} */}
               <li className="list-group-item">
-                Sobrenome: {'Sobrenome do Dentista'}
+                Sobrenome: 
               </li>
+              {/* {detail.usuario} */}
               <li className="list-group-item">
-                Usuário: {'Nome de usuário do Dentista'}
+                Usuário: 
               </li>
             </ul>
             <div className="text-center">

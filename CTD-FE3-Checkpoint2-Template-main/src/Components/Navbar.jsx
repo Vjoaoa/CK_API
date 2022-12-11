@@ -8,8 +8,9 @@ const Navbar = () => {
   
   const {theme, handleTheme} = useContext(ThemeContext)
 
+
   return (
-    <div className={theme === "ligth" ? "cardDark" : "cardLight"}>
+    <div className={theme === "ligth" ? "dark" : "light"}>
           <header className="sticky-top">
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar navbar-dark bg-dark ou navbar-light bg-light*/}
@@ -61,15 +62,14 @@ const Navbar = () => {
                  Lembre-se de usar um estado no contexto para fazer essa alteração.
                  Na linha seguinte deverá ser feito um teste se a aplicação
                  está em dark mode e deverá utilizar o icone ☀ ou 🌙 e btn-dark ou btn-light*/}
-                <button
+              </li>
+            </ul>
+            <button
+                  onClick={handleTheme}
                   className={`btn btn-light${styles.btnStyle}`} 
                 >
                   ☀ 🌙{" "}
                 </button>
-
-                <button onClick={handleTheme}></button>
-              </li>
-            </ul>
           </div>  
         </div>
       </nav>
