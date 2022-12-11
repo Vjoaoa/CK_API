@@ -14,11 +14,18 @@ const DetailCard = () => {
       setdetalheDentista(response.data);
     }, []);
   }, []);
+
+  detalheDentista.map((dentist) => (
+    <a href={`/dentist/${dentist.matricula}`}>
+      <h5 className="card-title" key="id">{dentist.nome}</h5>
+      <h5 className="card-title" key="id">{dentist.sobrenome}</h5>
+    </a>
+  ));
   return (
-    //As instruções que estão com {''} precisam ser 
-    //substituídas com as informações que vem da api
+    
     <>
-      <h1>Detail about Dentist {'Nome do Dentista'} </h1>
+    
+      <h1>Detail about Dentist {dentist.nome} </h1>
       <section className="card col-sm-12 col-lg-6 container">
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
@@ -34,7 +41,7 @@ const DetailCard = () => {
           </div>
           <div className="col-sm-12 col-lg-6">
             <ul className="list-group">
-              <li className="list-group-item">Nome: {'Nome do Dentista'}</li>
+              <li className="list-group-item">Nome: {dentist.nome}</li>
               <li className="list-group-item">
                 Sobrenome: {'Sobrenome do Dentista'}
               </li>
