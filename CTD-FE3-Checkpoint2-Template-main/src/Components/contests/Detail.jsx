@@ -1,43 +1,33 @@
-import { useState } from "react";
-import { createContext } from "react";
-
-export const DetailContext = createContext({});
+import { Children, useState } from "react";
+import { useEffect } from "react";
+import { createContext} from "react";
 
 import api from "../../services/api";
 
-const DetailProvider =({children})=>{
-    const [detail, setDetail] = useState([])
+export const DetailContext = createContext({});
 
-    const [error, setError ] = useState(false)
+const DetailProvider =({Children})=>{
+    const [detista, setDentista] = useState([])
+  
+    async function getDentista() {
+        try {
+          const response = await api.get("/dentista");
+          setDentista(response.data);
+        } catch (error) {
+          console.log("Error" + error);
+        }  
+      }
 
-    const[loading, setLoading] = useState(false)
-
-   async function getDetail() {
-    setLoading(true)
-    try {
-       const response = await api.get("/detail")
-
-       setDetail(response.data)
-    } catch (error) {
-        setError(true)
-    }finally{
-        setLoading(false)
-    }
-   } 
-
-
-    useEffect(() => {
-        //Nesse useEffect, você vai fazer um fetch na api passando o 
-        //id do dentista que está vindo do react-router e carregar os dados em algum estado
-        getDetail({id});
-      }, []);
-
+    useEffect(()=>{
+        getDentista
+    },[])
 
     return(
-        <DetailContext.Provider value={{detail, error, loading}}>
-            {children}
-        </DetailContext.Provider>
+        <DetailProvider.Provider value={{detista}}>
+            {{Children}}
+        </DetailProvider.Provider>
     )
-};
 
-export default DetailProvider;
+;
+}
+export default DetailProvider

@@ -1,23 +1,28 @@
 import home from "../Routes/Home";
+import api from "../services/api";
 import styles from "./Form.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import api from "../services/api";
+ import { SaveStorage} from "./contests/SaveStorage"; 
+import { useContext } from "react";
 
 
 
 const Auth = () => {
+ 
+    const {saveStorageData} = useContext(SaveStorage)
 
-  const navigate = useNavigate();
-
-  const [username, setUsername] = useState("dentistaAdmin");
-  const [password, setPassword] = useState("admin123");
+    const [username, setUsername] = useState("dentistaAdmin");
+    
+    const [password, setPassword] = useState("admin123");
+    const navigate = useNavigate();
 
   function submitForm(event){
     event.preventDefault();
 
 
     auth();
+
 
   }
 
@@ -27,12 +32,19 @@ const Auth = () => {
         username, 
         password,
       });
+      
+      saveStorageData({
+        token: response.data.token
+      })
+      
       navigate("/home");
 
-      console.log(response);
-    }catch(error){
-      alert("Erro ao fazer login, tente novamente");
-    }
+      }catch(error){
+        
+      alert("Erro ao fazer login, tente novamente "+ error);
+
+      }
+    
   }
 
     return (
@@ -61,7 +73,8 @@ const Auth = () => {
                 type="password"
                 required
               />
-              <button className="btn btn-primary" type="submit">
+              <button 
+              className="btn btn-primary" type="submit">
                 Entrar
               </button>
             </form>

@@ -6,22 +6,19 @@ import { DetailContext } from "./contests/Detail";
 
 const DetailCard = () => {
 
-  const { detail, error, loading } = useContext(DetailContext);
+  const { dentista} = useContext(DetailContext);
 
   return (
-
-    
-    //As instruções que estão com {''} precisam ser 
+//As instruções que estão com {''} precisam ser
     //substituídas com as informações que vem da api
     <>
-      
-      {/* {detail.nome} */}
-      <h1>Detail about Dentist  </h1>
+      <h1>
+        Informação sobre {dentista.nome} {dentista.sobrenome}{" "}
+      </h1>
       <section className="card col-sm-12 col-lg-6 container">
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
         <div
-          className={`card-body row`}
         >
           <div className="col-sm-12 col-lg-6">
             <img
@@ -32,15 +29,12 @@ const DetailCard = () => {
           </div>
           <div className="col-sm-12 col-lg-6">
             <ul className="list-group">
-            {/* {detail.nome} */}
-              <li className="list-group-item">Nome: </li>
-              {/* {detail.sobrenome} */}
+              <li className="list-group-item">Nome: {dentista.nome}</li>
               <li className="list-group-item">
-                Sobrenome: 
+                Sobrenome: {dentista.sobrenome}
               </li>
-              {/* {detail.usuario} */}
               <li className="list-group-item">
-                Usuário: 
+                Matrícula: {dentista.matricula}
               </li>
             </ul>
             <div className="text-center">
@@ -49,8 +43,11 @@ const DetailCard = () => {
               <button
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                className={`btn btn-light ${styles.button
-                  }`}
+                className={
+                  theme === "light"
+                    ? `btn btn-light ${styles.button}`
+                    : `btn btn-dark ${styles.button}`
+                }
               >
                 Marcar consulta
               </button>
@@ -60,7 +57,15 @@ const DetailCard = () => {
       </section>
       <ScheduleFormModal />
     </>
-  );
-};
+    );
+  };
+    
+  //As instruções que estão com {''} precisam ser 
+    //substituídas com as informações que vem da api
+    
+      
+
+
+// <ScheduleFormModal />
 
 export default DetailCard;
