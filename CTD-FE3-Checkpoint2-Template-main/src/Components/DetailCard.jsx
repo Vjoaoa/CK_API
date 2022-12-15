@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
+
 import api from "../services/api";
 
 const DetailCard = () => {
@@ -29,7 +30,6 @@ const DetailCard = () => {
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
         <div
-          className={`card-body row`}
         >
           <div className="col-sm-12 col-lg-6">
             <img
@@ -40,12 +40,13 @@ const DetailCard = () => {
           </div>
           <div className="col-sm-12 col-lg-6">
             <ul className="list-group">
-              <li className="list-group-item">Nome: {dentist.nome}</li>
+              <li className="list-group-item">Nome: {dentista.nome}</li>
+
               <li className="list-group-item">
-                Sobrenome: {'Sobrenome do Dentista'}
+                Sobrenome: {dentista.sobrenome}
               </li>
               <li className="list-group-item">
-                Usuário: {'Nome de usuário do Dentista'}
+                Matrícula: {dentista.matricula}
               </li>
             </ul>
             <div className="text-center">
@@ -54,8 +55,11 @@ const DetailCard = () => {
               <button
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                className={`btn btn-light ${styles.button
-                  }`}
+                className={
+                  theme === "light"
+                    ? `btn btn-light ${styles.button}`
+                    : `btn btn-dark ${styles.button}`
+                }
               >
                 Marcar consulta
               </button>
@@ -65,7 +69,15 @@ const DetailCard = () => {
       </section>
       <ScheduleFormModal />
     </>
-  );
-};
+    );
+  };
+    
+  //As instruções que estão com {''} precisam ser 
+    //substituídas com as informações que vem da api
+    
+      
+
+
+// <ScheduleFormModal />
 
 export default DetailCard;
