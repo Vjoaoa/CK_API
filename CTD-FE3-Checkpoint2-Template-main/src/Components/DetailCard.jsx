@@ -10,19 +10,22 @@ const DetailCard = () => {
 
     const [detalheDentista, setdetalheDentista] = useState([]);
 
-    useEffect(async() => {
-      const response = await api.get("/dentista?matricula=${id}");
-      setdetalheDentista(response.data);
+    useEffect (() => {
+      getDentista();  
     }, []);
-  }, []);
 
-  detalheDentista.map((dentist) => (
-    <a href={`/dentist/${dentist.matricula}`}>
-      <h5 className="card-title" key="id">{dentist.nome} {dentist.sobrenome}</h5>
-    </a>
-  ));
-  return (
-    
+    async function getDentista() {
+      try {
+        const response = await api.get("/dentista");
+        setdetalheDentista(response.data);
+      } catch (error) {
+        console.log("Error" + error);
+      }  
+    }
+
+  detalheDentista.map((dentist) => {
+
+    return (
     <>
     
       <h1>Detail about Dentist {dentist.nome} </h1>
@@ -40,13 +43,13 @@ const DetailCard = () => {
           </div>
           <div className="col-sm-12 col-lg-6">
             <ul className="list-group">
-              <li className="list-group-item">Nome: {dentista.nome}</li>
+              <li className="list-group-item">Nome: {dentist.nome}</li>
 
               <li className="list-group-item">
-                Sobrenome: {dentista.sobrenome}
+                Sobrenome: {dentist.sobrenome}
               </li>
               <li className="list-group-item">
-                Matrícula: {dentista.matricula}
+                Matrícula: {dentist.matricula}
               </li>
             </ul>
             <div className="text-center">
@@ -70,14 +73,10 @@ const DetailCard = () => {
       <ScheduleFormModal />
     </>
     );
-  };
-    
-  //As instruções que estão com {''} precisam ser 
-    //substituídas com as informações que vem da api
-    
-      
+  });
+  }, []);
+};
 
 
-// <ScheduleFormModal />
 
 export default DetailCard;
