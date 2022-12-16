@@ -1,82 +1,76 @@
 
-import ScheduleFormModal from "./ScheduleFormModal";
-import styles from "./DetailCard.module.css";
 
 import api from "../services/api";
+import styles from "./Form.module.css";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-const DetailCard = () => {
 
-  useEffect( () => {
 
-    const [detalheDentista, setdetalheDentista] = useState([]);
+const Auth = () => {
 
-    useEffect (() => {
-      getDentista();  
-    }, []);
+  const navigate = useNavigate();
 
-    async function getDentista() {
-      try {
-        const response = await api.get("/dentista");
-        setdetalheDentista(response.data);
-      } catch (error) {
-        console.log("Error" + error);
-      }  
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function submitForm(event){
+    event.preventDefault();
+
+
+    auth();
+
+  }
+
+  async function auth(){
+    try{
+      const response = await api.post("/auth", {
+        username, 
+        password,
+      });
+      navigate("/home");
+
+      console.log(response);
+    }catch(error){
+      alert("Erro ao fazer login, tente novamente");
     }
-
-  detalheDentista.map((dentist) => {
+  }
 
     return (
-    <>
-    
-      <h1>Detail about Dentist {dentist.nome} </h1>
-      <section className="card col-sm-12 col-lg-6 container">
-        {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-        // está em dark mode e deverá utilizar o css correto */}
-        <div
-        >
-          <div className="col-sm-12 col-lg-6">
-            <img
-              className="card-img-top"
-              src="/images/doctor.jpg"
-              alt="doctor placeholder"
-            />
-          </div>
-          <div className="col-sm-12 col-lg-6">
-            <ul className="list-group">
-              <li className="list-group-item">Nome: {dentist.nome}</li>
+      <>
 
-              <li className="list-group-item">
-                Sobrenome: {dentist.sobrenome}
-              </li>
-              <li className="list-group-item">
-                Matrícula: {dentist.matricula}
-              </li>
-            </ul>
-            <div className="text-center">
-              {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-              // está em dark mode e deverá utilizado o css correto */}
-              <button
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                className={
-                  theme === "light"
-                    ? `btn btn-light ${styles.button}`
-                    : `btn btn-dark ${styles.button}`
-                }
-              >
-                Marcar consulta
+    
+        <div
+          className={`text-center card container ${styles.card}`}
+        >
+          <div className={`card-body ${styles.CardBody}`}>
+            <form onSubmit={submitForm}>
+              <input
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className={`form-control ${styles.inputSpacing}`}
+                placeholder="Usuário"
+                name="username"
+                required
+              />
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={`form-control ${styles.inputSpacing}`}
+                placeholder="Senha"
+                name="password"
+                type="password"
+                required
+              />
+              <button className="btn btn-primary" type="submit">
+                Entrar
               </button>
-            </div>
+            </form>
           </div>
         </div>
-      </section>
-      <ScheduleFormModal />
-    </>
+      </>
     );
-  });
-  }, []);
-};
+ };
 
+export default Auth;
 
-
-export default DetailCard;
