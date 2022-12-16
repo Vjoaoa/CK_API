@@ -16,14 +16,11 @@ const Card = (props) => {
           alt="doctor placeholder"
         />
         <div className={`card-body ${styles.CardBody}`}>
-          <a href={`/dentist/${dentista.matricula}`}>
+          <a href={`/dentist`}>
             <h5 className={`card-title ${styles.title}`}>
               {dentista.nome} {dentista.sobrenome}
             </h5>
           </a>
-          <button style={{ fontSize: "12px" }} value={dentista.matricula}>
-            Adicionar aos favoritos
-          </button>
         </div>
       </div>
       
